@@ -1,0 +1,22 @@
+version: "3.8"
+
+services:
+  nginx:
+    build: .
+    ports:
+      - "80:80"
+    depends_on:
+      - auth_service
+      - backend_service
+
+  auth_service:
+    image: hashicorp/http-echo:latest
+    command: ["-text=Autenticado", "-listen=:8081", "-status=200"]
+    expose:
+      - "8081"
+
+  backend_service:
+    image: hashicorp/http-echo:latest
+    command: ["-text=Hello from backend", "-listen=:8080", "-status=200"]
+    expose:
+      - "8080"
