@@ -1,6 +1,6 @@
 FROM python:3.9-slim
 
-ENV DB_HOST="postgres"
+ENV DB_HOST="container-acr-db"
 ENV DB_NAME="DashboardGestaoAPI"
 ENV DB_USER="postgres"
 ENV DB_PORT=5432
