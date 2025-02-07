@@ -33,7 +33,10 @@ services:
   runner:
     build: ./Dockerfile_runner
     container_name: container-acr-runner
+    networks:
+      - app_network
     depends_on:
+      - backend
       - db
 
   db:
