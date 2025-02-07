@@ -2,24 +2,28 @@
 ```sh
 cd Dockerfile_backend
 docker build -t acr-backend-service .
+cd ..
 ```
 
 - Gerar imagem do docker do runner
 ```sh
 cd Dockerfile_runner
 docker build -t acr-runner .
+cd ..
 ```
 
 - Gerar imagem do docker do servico de autenticacao
 ```sh
 cd Dockerfile_auth
 docker build -t acr-auth .
+cd ..
 ```
 
 - Gerar imagem do docker do nginx
 ```sh
 cd Dockerfile_nginx
 docker build -t acr-nginx .
+cd ..
 ```
 
 - Rodar docker-compose
