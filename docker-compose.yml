@@ -1,62 +1,47 @@
-version: "3.8"
+version: '3.8'
 
 services:
   nginx:
-    build: ./nginx
+    image: acr-nginx
+    container_name: container-acr-nginx
     ports:
       - "80:80"
     depends_on:
-      - auth_service
-      - backend_service
-
-  auth_service:
-    image: hashicorp/http-echo:latest
-    command: ["-text=Autenticado", "-listen=:8081"]
-    expose:
-      - "8081"
-
-  backend_service:
-    image: hashicorp/http-echo:latest
-    command: ["-text=Hello from backend", "-listen=:8080"]
-    expose:
-      - "8080"
+      - backend
+      - auth
+    networks:
+      - app_network
   
-  zookeeper:
-    image: wurstmeister/zookeeper:latest
+  auth:
+    image: acr-auth
+    container_name: container-acr-auth
     ports:
-      - "2181:2181"
+      - "8081:8081"
+    networks:
+      - app_network
 
-  kafka:
-    image: wurstmeister/kafka:latest
+  backend:
+    image: acr-backend-service
+    container_name: container-acr-backend-service
     ports:
-      - "9092:9092"
-    expose:
-      - "9093"
+      - "8080:8080"
+    networks:
+      - app_network
+    depends_on:
+      - db
+
+  db:
+    image: postgres:latest
+    container_name: container-acr-db
     environment:
-      KAFKA_ADVERTISED_LISTENERS: INSIDE://kafka:9093,OUTSIDE://localhost:9092
-      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: INSIDE:PLAINTEXT,OUTSIDE:PLAINTEXT
-      KAFKA_LISTENERS: INSIDE://0.0.0.0:9093,OUTSIDE://0.0.0.0:9092
-      KAFKA_INTER_BROKER_LISTENER_NAME: INSIDE
-      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
-      KAFKA_CREATE_TOPICS: "execution:1:1"
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-      - ./kafka/entrypoint.sh:/usr/local/bin/entrypoint.sh 
-    entrypoint: ["/usr/local/bin/entrypoint.sh"]  
-  
-  postgres:
-    build: ./postgres
-    volumes:
-      - pgdata:/var/lib/postgresql/data
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: DashboardGestaoAPI
     ports:
       - "5432:5432"
-  
-  acr_dashboard_runner:
-    build: ./acr_dashboard_runner
-    depends_on:
-      - postgres
+    networks:
+      - app_network
 
-volumes:
-  pgdata:
-
- 
+networks:
+  app_network:
+    driver: bridge
