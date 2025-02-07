@@ -1,7 +1,7 @@
 ## Projetos
 
 - [Dashboard code in Java](https://github.com/kielsonzinn/Dashboard-gestao-API)
-- [Runner code in Python](https://github.com/andreruizrt/automatic-code-review-dashboard-runner)
+- [Runner code in Python](https://github.com/andreruizrt/automatic-code-review-dashboard-runner/tree/kafka_consumer)
 
 ## Preparando ambiente
 
