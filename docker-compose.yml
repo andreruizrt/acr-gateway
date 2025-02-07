@@ -30,6 +30,12 @@ services:
     depends_on:
       - db
 
+  runner:
+    build: ./Dockerfile_runner
+    container_name: container-acr-runner
+    depends_on:
+      - db
+
   db:
     image: postgres:latest
     container_name: container-acr-db

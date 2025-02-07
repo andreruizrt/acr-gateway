@@ -4,6 +4,12 @@ cd Dockerfile_backend
 docker build -t acr-backend-service .
 ```
 
+- Gerar imagem do docker do runner
+```sh
+cd Dockerfile_runner
+docker build -t acr-runner .
+```
+
 - Gerar imagem do docker do servico de autenticacao
 ```sh
 cd Dockerfile_auth
