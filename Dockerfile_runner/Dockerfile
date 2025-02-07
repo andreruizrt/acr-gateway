@@ -19,4 +19,13 @@ RUN git clone -b kafka_consumer https://github.com/andreruizrt/automatic-code-re
 
 RUN if [ -f requirements.txt ]; then pip install --no-cache-dir -r requirements.txt; fi
 
+RUN mkdir -p /app/groups/DashboardGestaoAPI/resources/configs/acr-regex
+COPY config.json /app/groups/DashboardGestaoAPI/resources/configs/acr-regex
+
+RUN mkdir -p /app/groups/DashboardGestaoAPI/resources/extensions/acr-regex
+RUN git clone https://github.com/automatic-code-review/acr-regex.git /app/groups/DashboardGestaoAPI/resources/extensions/acr-regex
+RUN cd /app/groups/DashboardGestaoAPI/resources/extensions/acr-regex && pip install --no-cache-dir -r requirements.txt
+
+RUN mkdir -p /app/groups/DashboardGestaoAPI/resources/output
+
 CMD ["python", "app.py"]
