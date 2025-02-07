@@ -24,9 +24,6 @@ docker-compose up --build
 -  Finalizar README.md
     - Imagem da arquitetura
 
-- Deixar o runner 100%
-    - Fazer gerar pelo menos uma issue
-
 - Desenvolver
     - No auth, endpoint que so retorna o nome do usuario
     - No gestao, ajustar o executor para gravar o nome do usuario usando feign client
