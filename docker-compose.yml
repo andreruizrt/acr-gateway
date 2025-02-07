@@ -2,7 +2,9 @@ version: '3.8'
 
 services:
   nginx:
-    image: acr-nginx
+    build:
+      context: ./Dockerfile_nginx
+      dockerfile: Dockerfile
     container_name: container-acr-nginx
     ports:
       - "80:80"
@@ -13,7 +15,9 @@ services:
       - app_network
   
   auth:
-    image: acr-auth
+    build:
+      context: ./Dockerfile_auth
+      dockerfile: Dockerfile
     container_name: container-acr-auth
     ports:
       - "8081"
@@ -21,7 +25,9 @@ services:
       - app_network
 
   backend:
-    image: acr-backend-service
+    build:
+      context: ./Dockerfile_backend
+      dockerfile: Dockerfile
     container_name: container-acr-backend-service
     ports:
       - "8080"
@@ -29,15 +35,19 @@ services:
       - app_network
     depends_on:
       - db
+      - kafka
 
   runner:
-    build: ./Dockerfile_runner
+    build:
+      context: ./Dockerfile_runner
+      dockerfile: Dockerfile
     container_name: container-acr-runner
     networks:
       - app_network
     depends_on:
-      - backend
       - db
+      - backend
+      - kafka
 
   db:
     image: postgres:latest
@@ -48,6 +58,33 @@ services:
       POSTGRES_DB: DashboardGestaoAPI
     ports:
       - "5432"
+    networks:
+      - app_network
+
+  zookeeper:
+    image: confluentinc/cp-zookeeper:latest
+    container_name: container-acr-zookeeper
+    ports:
+      - "2181"
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
+      ZOOKEEPER_TICK_TIME: 2000
+    networks:
+      - app_network
+
+  kafka:
+    image: confluentinc/cp-kafka:latest
+    container_name: container-acr-kafka
+    depends_on:
+      - zookeeper
+    ports:
+      - "9092"
+    environment:
+      KAFKA_BROKER_ID: 1
+      KAFKA_ZOOKEEPER_CONNECT: "container-acr-zookeeper:2181"
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://container-acr-kafka:9092
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+      KAFKA_CREATE_TOPICS: "execution:1:1"
     networks:
       - app_network
 
