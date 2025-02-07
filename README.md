@@ -18,14 +18,14 @@ cd ..
 ```sh
 cd Dockerfile_auth
 docker build -t acr-auth .
-cd..
+cd ..
 ```
 
 - Gerar imagem do docker do nginx
 ```sh
 cd Dockerfile_nginx
 docker build -t acr-nginx .
-cd..
+cd ..
 ```
 
 - Rodar docker-compose
