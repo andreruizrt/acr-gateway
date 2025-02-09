@@ -3,6 +3,18 @@
 - [Dashboard code in Java](https://github.com/kielsonzinn/Dashboard-gestao-API)
 - [Runner code in Python](https://github.com/andreruizrt/automatic-code-review-dashboard-runner/tree/kafka_consumer)
 
+## O que foi feito
+
+- Dashboard gestao em java
+- Dashboard runner em python
+- Dashboard auth em java
+- Mensageria com Kafka
+- Ambiente em docker + docker-compose
+- Gateway em nginx
+- Spring, spring authentication, feign e validator
+- PostgreSQL e H2
+- Postman e swagger
+
 ## Preparando ambiente
 
 - Rodar docker-compose
