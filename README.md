@@ -1,3 +1,7 @@
+## Arquitetura
+
+![Arquitetura](resources/arquitetura.png)
+
 ## Projetos
 
 - [Dashboard code in Java](https://github.com/kielsonzinn/Dashboard-gestao-API)
@@ -30,13 +34,3 @@ docker-compose up --build
 
 - Usar o [postman-collection](https://github.com/andreruizrt/acr-gateway/blob/main/DashboardRequest.postman_collection.json)
 - Ao chamar o endpoint de Login, já ira setar automaticamente o token para as proximas requests
-
-## TODO
-
--  Finalizar README.md
-    - Imagem da arquitetura
-
-- Desenvolver
-    - No auth, endpoint que so retorna o nome do usuario
-    - No auth, endpoint que so diz se ta autenticado
-    - No gestao, ajustar o executor para gravar o nome do usuario usando feign client
