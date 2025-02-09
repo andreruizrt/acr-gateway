@@ -7,6 +7,12 @@
 - [Dashboard code in Java](https://github.com/kielsonzinn/Dashboard-gestao-API)
 - [Runner code in Python](https://github.com/andreruizrt/automatic-code-review-dashboard-runner/tree/kafka_consumer)
 
+## Alunos
+
+- Maria, 2272636
+- Andre, 2203600
+- Kielson, 2003317
+
 ## O que foi feito
 
 - Dashboard gestao em java
