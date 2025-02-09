@@ -26,5 +26,5 @@ docker-compose up --build
 
 - Desenvolver
     - No auth, endpoint que so retorna o nome do usuario
+    - No auth, endpoint que so diz se ta autenticado
     - No gestao, ajustar o executor para gravar o nome do usuario usando feign client
-    - No auth, endpoint que so diz se ta autenticado    
